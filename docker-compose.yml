@@ -1,0 +1,60 @@
+version: '3.8'
+
+networks:
+  backend-network:
+    driver: bridge
+
+services:
+  taskboard-keycloak-db-boot:
+    image: postgres:15
+    container_name: taskboard-keycloak-db-boot
+    restart: always
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+    volumes:
+      - keycloak-storage:/var/lib/postgresql/data
+    networks:
+      - backend-network
+
+  taskboard-keycloak-boot:
+    image: quay.io/keycloak/keycloak:22.0
+    container_name: taskboard-keycloak-boot
+    restart: always
+    depends_on:
+      - taskboard-keycloak-db-boot
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://taskboard-keycloak-db-boot/keycloak
+      KC_HOSTNAME: taskboard-keycloak-boot
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+    command: ["start-dev", "--import-realm"]
+    volumes:
+      - ./config/keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json
+    networks:
+      - backend-network
+    ports:
+      - "8081:8080"
+
+  taskboard-authenticator-boot:
+    image: taskboard-authenticator-boot:latest
+    container_name: taskboard-authenticator-boot
+    restart: always
+    depends_on:
+      - taskboard-keycloak-boot
+    env_file:
+      - .env
+    environment:
+      KEYCLOAK_SERVER_URL: http://taskboard-keycloak-boot:8080
+    networks:
+      - backend-network
+    ports:
+      - "8080:8080"
+
+volumes:
+  service-storage:
+  keycloak-storage:

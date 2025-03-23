@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: TaskBoard.Authenticator.Boot
+
+taskboard:
+  exceptions:
+    handler:
+      enabled: true
+
+  security:
+    keycloak:
+      auth-server-url: ${KEYCLOAK_SERVER_URL:http://localhost:8081}/realms/TodoRealm
+      realm: TodoRealm
+      client-id: my-client
