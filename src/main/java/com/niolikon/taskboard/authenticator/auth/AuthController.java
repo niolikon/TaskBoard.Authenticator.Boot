@@ -6,6 +6,7 @@ import com.niolikon.taskboard.framework.security.dto.UserLogoutRequest;
 import com.niolikon.taskboard.framework.security.dto.UserTokenRefreshRequest;
 import com.niolikon.taskboard.framework.security.dto.UserTokenView;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,8 +21,9 @@ public class AuthController {
 
     private JwtAuthenticationService jwtAuthenticationService;
 
-    public void setJwtAuthenticationService(final JwtAuthenticationService jwtAuthenticationService) {
-        this.jwtAuthenticationService = jwtAuthenticationService;
+    @Autowired
+    public void setJwtAuthenticationService(JwtAuthenticationService keycloakAuthService) {
+        this.jwtAuthenticationService = keycloakAuthService;
     }
 
 
