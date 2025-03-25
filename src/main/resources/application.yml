@@ -12,6 +12,6 @@ taskboard:
 
   security:
     keycloak:
-      auth-server-url: ${KEYCLOAK_SERVER_URL:http://localhost:8081}/realms/TodoRealm
+      auth-server-url: ${KEYCLOAK_SERVER_URL:http://localhost:8081}
       realm: TodoRealm
       client-id: my-client
