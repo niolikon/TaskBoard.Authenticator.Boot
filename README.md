@@ -1,6 +1,6 @@
 # TaskBoard.Authenticator.Boot
-[![Build](https://github.com/niolikon/TaskBoard.Authenticator.Boot/actions/workflows/maven.yml/badge.svg)](https://github.com/niolikon/TaskBoard.Authenticator.Boot/actions)
-[![Package](https://github.com/niolikon/TaskBoard.Authenticator.Boot/actions/workflows/publish-maven.yml/badge.svg)](https://github.com/niolikon/TaskBoard.Authenticator.Boot/actions)
+[![Build](https://github.com/niolikon/TaskBoard.Authenticator.Boot/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/niolikon/TaskBoard.Authenticator.Boot/actions)
+[![Package](https://github.com/niolikon/TaskBoard.Authenticator.Boot/actions/workflows/publish-release.yml/badge.svg)](https://github.com/niolikon/TaskBoard.Authenticator.Boot/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 Task Board Authenticator (Spring Case Study)
